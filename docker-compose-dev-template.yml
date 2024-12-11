@@ -1,0 +1,24 @@
+api_gateway:
+    # Build parameters for the container
+    build: .
+    image: aljovanmp/ticket_be_api_gateway:latest
+    container_name: ticket_api_gateway
+    ports:
+      # Maps ports to be accessed by the app outside of the container
+      - "4002:4000"
+    environment:
+      SECRET_KEY_BASE: 
+
+    develop:
+      watch:
+        - action: sync
+          path: ./lib
+          target: /app/lib
+        - action: sync+restart
+          path: ./config
+          target: /app/config
+
+dummy:
+    image: alpine:latest
+    init: true
+    command: ["sh", "-c", "while true; do sleep 2; done"]
