@@ -1,15 +1,5 @@
 import Config
 
-# Configure your database
-config :api_gateway, ApiGateway.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "api_gateway_dev",
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -23,7 +13,7 @@ config :api_gateway, ApiGatewayWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "h7NnsPimXOlGB4ySl2CtQw5mrWfHgTZDUdrXNceMzi/nDG/aKWJeE1B+FAYgdkc3",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   watchers: []
 
 # ## SSL Support

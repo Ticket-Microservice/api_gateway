@@ -9,9 +9,9 @@ defmodule ApiGateway.Application do
   def start(_type, _args) do
     children = [
       ApiGatewayWeb.Telemetry,
-      ApiGateway.Repo,
       {DNSCluster, query: Application.get_env(:api_gateway, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ApiGateway.PubSub},
+      ApiGateway.GRPCClient,
       # Start a worker by calling: ApiGateway.Worker.start_link(arg)
       # {ApiGateway.Worker, arg},
       # Start to serve requests, typically the last entry
